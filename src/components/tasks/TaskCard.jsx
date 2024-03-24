@@ -1,45 +1,39 @@
-import { ArrowRightIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { BsThreeDotsVertical } from "react-icons/bs";
 
-const TaskCard = () => {
-  const task = {
-    id: 1,
-    status: 'pending',
-    title: 'Remove Button',
-    description:
-      'We need a remove button in our task card. Meke the button red and use Heroicon for tashbin icon.',
-    date: '2023-08-28',
-    assignedTo: 'Mir Hussain',
-    priority: 'high',
-  };
+const TaskCard = ({ task }) => {
+  // const task = {
+  //   id: 1,
+  //   status: "pending",
+  //   title: "Task-1 amar sonar Bangla ami tomai valobashi",
+  //   description: "We need a remove button in our task card. ",
+  //   date: "2023-08-28",
+  //   assigness: "Mir Hussain",
+  //   periority: "po",
+  // };
 
   return (
-    <div className="bg-secondary/10 rounded-md p-5">
-      <h1
-        className={`text-lg font-semibold mb-3  ${
-          task.priority === 'high' ? 'text-red-500' : ''
-        } ${task.priority === 'medium' ? 'text-yellow-500' : ''} ${
-          task.priority === 'low' ? 'text-green-500' : ''
-        }`}
-      >
-        {task?.title}
-      </h1>
-      <p className="mb-3">{task?.description}</p>
-      <p className="text-sm">Assigned to - {task?.assignedTo}</p>
-      <div className="flex justify-between mt-3">
-        <p>{task?.date}</p>
-        <div className="flex gap-3">
-          <button onClick={() => dispatch(removeTask(task.id))} title="Delete">
-            <TrashIcon className="h-5 w-5 text-red-500" />
-          </button>
-          <button
-            onClick={() =>
-              dispatch(updateStatus({ id: task.id, status: updatedStatus }))
-            }
-            title="In progress"
-          >
-            <ArrowRightIcon className="h-5 w-5 text-primary" />
+    <div className="space-y-3 rounded-md text-xs px-2">
+      <div className="bg-gray-300 p-3">
+        <div className="border-b-2 border-gray-400 mb-3 flex justify-between">
+          <h3 className="mb-2  font-medium text-justify tracking-tighter">
+            {task?.title}{" "}
+          </h3>
+          <span className="bg-primary p-1 text-white ml-1 max-h-8">
+            {task?.periority}
+          </span>
+        </div>
+        <p className="mb-3 text-justify tracking-tighter">
+          {task?.description}
+        </p>
+        <div className="flex justify-between my-3">
+          <p className="font-medium">@{task?.assigness}</p>
+          <button className="bg-primary p-1 text-white">
+            <BsThreeDotsVertical />
           </button>
         </div>
+        <button className="bg-primary px-4 py-1 my-2 text-white rounded-md">
+          {task?.status}
+        </button>
       </div>
     </div>
   );

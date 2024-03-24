@@ -1,111 +1,66 @@
-import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import MyTasks from '../components/tasks/MyTasks';
-import TaskCard from '../components/tasks/TaskCard';
-
+import Header from "../components/layouts/Header";
+import TaskCard from "../components/tasks/TaskCard";
+import FunctionalHeader from "../components/layouts/FunctionalHeader";
+import { useSelector } from "react-redux";
 const Tasks = () => {
+  const { tasks } = useSelector((state) => state.taskSlice);
   return (
-    <div className="h-screen grid grid-cols-12">
-      <div className="col-span-9 px-10 pt-10">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="font-semibold text-3xl">Tasks</h1>
-          </div>
-          <div className="flex gap-5">
-            <button className="border-2 border-secondary/20 hover:border-primary hover:bg-primary rounded-xl h-10 w-10  grid place-content-center text-secondary hover:text-white transition-all">
-              <MagnifyingGlassIcon className="h-6 w-6" />
-            </button>
-            <button className="border-2 border-secondary/20 hover:border-primary hover:bg-primary rounded-xl h-10 w-10 grid place-content-center text-secondary hover:text-white transition-all">
-              <BellIcon className="h-6 w-6" />
-            </button>
-            <button className="btn btn-primary">Add Task</button>
-            <div className="h-10 w-10 rounded-xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=644&q=80"
-                alt=""
-                className="object-cover h-full w-full "
-              />
+    <div className="min-h-screen bg-gradient-to-r from-[#beabc4] via-[#e9dbfc] to-[#dfdbfc] pt-6 md:px-10 px-2 ">
+      <div>
+        <Header />
+        <FunctionalHeader />
+        {/* Main Content  section*/}
+        <div className="grid md:grid-cols-5 grid-cols-1 gap-3 md:border-4 md:border-gray-400 shadow-lg rounded-3xl mt-6 md:p-6">
+          {/* Pending */}
+          <div className="relative overflow-auto">
+            <div className="text-center bg-[#8c8b90] p-2 rounded-tl-xl rounded-tr-xl">
+              <h1 className="text-white font-bold ">Pending</h1>
+            </div>
+            <div className="space-y-3 bg-gray-200 rounded-md  py-3">
+              {tasks?.map((task) => {
+                return <TaskCard key="hfjahjfahjah" task={task} />;
+              })}
             </div>
           </div>
-        </div>
-        <div className="grid grid-cols-3 gap-5 mt-10">
-          <div className="relative h-[800px] overflow-auto">
-            <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
-              <h1>Up Next</h1>
-              <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
-              </p>
+
+          {/* In Progress */}
+          <div className="relative overflow-auto">
+            <div className="text-center bg-[#e89924] p-2 rounded-tl-xl rounded-tr-xl">
+              <h1 className="text-white font-bold ">In Progress</h1>
             </div>
-            <div className="space-y-3">
-              <TaskCard />
-            </div>
-          </div>
-          <div className="relative h-[800px] overflow-auto">
-            <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
-              <h1>In Progress</h1>
-              <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
-              </p>
-            </div>
-            <div className="space-y-3">
+            <div className="space-y-3 bg-gray-200 rounded-md  py-3">
               <TaskCard />
               <TaskCard />
             </div>
           </div>
-          <div className="relative h-[800px] overflow-auto">
-            <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
-              <h1>Up Next</h1>
-              <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
-              </p>
+          {/* Completed */}
+          <div className="relative overflow-auto">
+            <div className="text-center bg-[#42a81e] p-2 rounded-tl-xl rounded-tr-xl">
+              <h1 className="text-white font-bold ">Completed</h1>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-3 bg-gray-200 rounded-md  py-3">
+              <TaskCard />
+            </div>
+          </div>
+          {/* Deployed */}
+          <div className="relative overflow-auto">
+            <div className="text-center bg-[#353976] p-2 rounded-tl-xl rounded-tr-xl">
+              <h1 className="text-white font-bold">Deployed</h1>
+            </div>
+            <div className="space-y-3 bg-gray-200 rounded-md  py-3">
+              <TaskCard />
+            </div>
+          </div>
+          {/* Deffered */}
+          <div className="relative overflow-auto">
+            <div className="text-center bg-[#f68871] p-2 rounded-tl-xl rounded-tr-xl">
+              <h1 className="text-white font-bold ">Deffered</h1>
+            </div>
+            <div className="space-y-3 bg-gray-200 rounded-md  py-3">
               <TaskCard />
             </div>
           </div>
         </div>
-      </div>
-      <div className="col-span-3 border-l-2 border-secondary/20 px-10 pt-10">
-        <div>
-          <h1 className="text-xl">Members</h1>
-          <div className="flex gap-3 mt-3">
-            <div className="h-10 w-10 rounded-xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-                alt=""
-                className="object-cover h-full w-full "
-              />
-            </div>
-            <div className="h-10 w-10 rounded-xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-                alt=""
-                className="object-cover h-full w-full "
-              />
-            </div>
-            <div className="h-10 w-10 rounded-xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-                alt=""
-                className="object-cover h-full w-full "
-              />
-            </div>
-            <div className="h-10 w-10 rounded-xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-                alt=""
-                className="object-cover h-full w-full "
-              />
-            </div>
-            <div className="h-10 w-10 rounded-xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-                alt=""
-                className="object-cover h-full w-full "
-              />
-            </div>
-          </div>
-        </div>
-        <MyTasks />
       </div>
     </div>
   );
