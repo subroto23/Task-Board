@@ -48,13 +48,13 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
             <div>
               <label htmlFor="Priority">Priority</label>
               <select
-                {...register("periority")}
+                {...register("priority")}
                 className="rounded-md text-center md:w-32 p-1"
               >
                 <option disabled>Priority</option>
-                <option value="p0">p0</option>
-                <option value="p1">p1</option>
-                <option value="p2">p2</option>
+                <option value="P0">P0</option>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
               </select>
             </div>
             <div>

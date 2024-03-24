@@ -1,9 +1,24 @@
 import Header from "../components/layouts/Header";
 import TaskCard from "../components/tasks/TaskCard";
 import FunctionalHeader from "../components/layouts/FunctionalHeader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { allTasks } from "../redux/features/taskSlice";
 const Tasks = () => {
-  const { tasks } = useSelector((state) => state.taskSlice);
+  const { filterData } = useSelector((state) => state.taskSlice);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(allTasks());
+  }, [dispatch]);
+
+  const pendingData = filterData?.filter((item) => item.status === "Pending");
+  const inProgressData = filterData.filter(
+    (item) => item.status === "In Progress"
+  );
+  const completedData = filterData.filter((item) => item.status === "Deployed");
+
+  const deployedData = filterData.filter((item) => item.status === "Completed");
+  const defferedData = filterData.filter((item) => item.status === "Deferred");
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#beabc4] via-[#e9dbfc] to-[#dfdbfc] pt-6 md:px-10 px-2 ">
       <div>
@@ -17,8 +32,8 @@ const Tasks = () => {
               <h1 className="text-white font-bold ">Pending</h1>
             </div>
             <div className="space-y-3 bg-gray-200 rounded-md  py-3">
-              {tasks?.map((task) => {
-                return <TaskCard key="hfjahjfahjah" task={task} />;
+              {pendingData?.map((task) => {
+                return <TaskCard key={Math.random()} task={task} />;
               })}
             </div>
           </div>
@@ -29,8 +44,9 @@ const Tasks = () => {
               <h1 className="text-white font-bold ">In Progress</h1>
             </div>
             <div className="space-y-3 bg-gray-200 rounded-md  py-3">
-              <TaskCard />
-              <TaskCard />
+              {inProgressData?.map((task) => {
+                return <TaskCard key={Math.random()} task={task} />;
+              })}
             </div>
           </div>
           {/* Completed */}
@@ -39,7 +55,9 @@ const Tasks = () => {
               <h1 className="text-white font-bold ">Completed</h1>
             </div>
             <div className="space-y-3 bg-gray-200 rounded-md  py-3">
-              <TaskCard />
+              {completedData?.map((task) => {
+                return <TaskCard key={Math.random()} task={task} />;
+              })}
             </div>
           </div>
           {/* Deployed */}
@@ -48,16 +66,20 @@ const Tasks = () => {
               <h1 className="text-white font-bold">Deployed</h1>
             </div>
             <div className="space-y-3 bg-gray-200 rounded-md  py-3">
-              <TaskCard />
+              {deployedData?.map((task) => {
+                return <TaskCard key={Math.random()} task={task} />;
+              })}
             </div>
           </div>
           {/* Deffered */}
           <div className="relative overflow-auto">
             <div className="text-center bg-[#f68871] p-2 rounded-tl-xl rounded-tr-xl">
-              <h1 className="text-white font-bold ">Deffered</h1>
+              <h1 className="text-white font-bold ">Deferred</h1>
             </div>
             <div className="space-y-3 bg-gray-200 rounded-md  py-3">
-              <TaskCard />
+              {defferedData?.map((task) => {
+                return <TaskCard key={Math.random()} task={task} />;
+              })}
             </div>
           </div>
         </div>

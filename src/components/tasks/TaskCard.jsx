@@ -1,16 +1,6 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 const TaskCard = ({ task }) => {
-  // const task = {
-  //   id: 1,
-  //   status: "pending",
-  //   title: "Task-1 amar sonar Bangla ami tomai valobashi",
-  //   description: "We need a remove button in our task card. ",
-  //   date: "2023-08-28",
-  //   assigness: "Mir Hussain",
-  //   periority: "po",
-  // };
-
   return (
     <div className="space-y-3 rounded-md text-xs px-2">
       <div className="bg-gray-300 p-3">
@@ -19,14 +9,14 @@ const TaskCard = ({ task }) => {
             {task?.title}{" "}
           </h3>
           <span className="bg-primary p-1 text-white ml-1 max-h-8">
-            {task?.periority}
+            {task?.priority}
           </span>
         </div>
         <p className="mb-3 text-justify tracking-tighter">
           {task?.description}
         </p>
         <div className="flex justify-between my-3">
-          <p className="font-medium">@{task?.assigness}</p>
+          <p className="font-medium">@{task?.assignee}</p>
           <button className="bg-primary p-1 text-white">
             <BsThreeDotsVertical />
           </button>
