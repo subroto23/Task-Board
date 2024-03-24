@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const initialState = {
   tasks: [
     {
-      id: 1,
+      id: "abc123",
       title: "Design Landing Page",
       description: "Create wireframes and design mockups for the landing page.",
       startDate: "2024-04-02",
@@ -14,7 +14,7 @@ const initialState = {
       priority: "P1",
     },
     {
-      id: 1,
+      id: "abc1234",
       title: "Design Landing Page",
       description: "Create wireframes and design mockups for the landing page.",
       startDate: "2024-04-02",
@@ -24,7 +24,7 @@ const initialState = {
       priority: "P0",
     },
     {
-      id: 2,
+      id: "abc12345",
       title: "Develop User Authentication",
       description: "Implement user authentication system using JWT.",
       startDate: "2024-03-24",
@@ -34,7 +34,7 @@ const initialState = {
       priority: "P0",
     },
     {
-      id: 3,
+      id: "abc123456",
       title: "Fix Bug in Dashboard",
       description: "Resolve issue with data not loading.",
       startDate: "2024-04-22",
@@ -44,7 +44,7 @@ const initialState = {
       priority: "P2",
     },
     {
-      id: 4,
+      id: "abc1234567",
       title: "Update API Documentation",
       description: "Update Swagger documentation to reflect changes.",
       startDate: "2024-03-18",
@@ -54,7 +54,7 @@ const initialState = {
       priority: "P1",
     },
     {
-      id: 5,
+      id: "abc123456789",
       title: "Deploy Backend Service",
       description: "Deploy backend to the vercel.",
       startDate: "2024-05-23",
@@ -84,9 +84,26 @@ const taskSlice = createSlice({
       state.filterData = state.tasks;
     },
 
+    //Update Task
+    updateTask: (state, { payload }) => {
+      const { priority, status, id } = payload;
+      console.log(payload);
+      //select from Tasks
+      const selectedTask = state.tasks.filter((item) => item.id === id);
+
+      //Update Properties
+      selectedTask[0].priority = priority;
+      selectedTask[0].status = status;
+      //Set Value
+      state.filterData = state.tasks;
+    },
+
     //Delete Task
     deleteTask: (state, { payload }) => {
-      state.tasks.filter((item) => item.id !== payload.id);
+      //Remove from filterData Tasks
+      state.filterData = state.tasks.filter((item) => item.id !== payload.id);
+      //Remove form Orginal Task
+      state.tasks = state.tasks.filter((item) => item.id !== payload.id);
     },
 
     //All Tasks Data
@@ -143,5 +160,6 @@ export const {
   priorityByFilter,
   dateBasedFilter,
   priorityBasedSort,
+  updateTask,
 } = taskSlice.actions;
 export default taskSlice.reducer;

@@ -15,9 +15,10 @@ const Tasks = () => {
   const inProgressData = filterData.filter(
     (item) => item.status === "In Progress"
   );
-  const completedData = filterData.filter((item) => item.status === "Deployed");
-
-  const deployedData = filterData.filter((item) => item.status === "Completed");
+  const completedData = filterData.filter(
+    (item) => item.status === "Completed"
+  );
+  const deployedData = filterData.filter((item) => item.status === "Deployed");
   const defferedData = filterData.filter((item) => item.status === "Deferred");
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#beabc4] via-[#e9dbfc] to-[#dfdbfc] pt-6 md:px-10 px-2 ">
