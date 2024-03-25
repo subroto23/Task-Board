@@ -4,82 +4,11 @@ import {
   specificIdBasedDataFound,
   withoutIdBasedTasks,
 } from "../../lib/SpecificDataGenerator";
-
-const initialState = {
-  tasks: [
-    {
-      id: "abc123",
-      title: "Design Landing Page",
-      description: "Create wireframes and design mockups for the landing page.",
-      startDate: "2024-04-02",
-      endDate: null,
-      status: "Pending",
-      assignee: "John Doe",
-      team: "abc",
-      priority: "P1",
-    },
-    {
-      id: "abc1234",
-      title: "Design Landing Page",
-      description: "Create wireframes and design mockups for the landing page.",
-      startDate: "2024-04-02",
-      endDate: null,
-      status: "Pending",
-      assignee: "John Doe",
-      team: "Falcon",
-      priority: "P0",
-    },
-    {
-      id: "abc12345",
-      title: "Develop User Authentication",
-      description: "Implement user authentication system using JWT.",
-      startDate: "2024-03-24",
-      endDate: null,
-      status: "In Progress",
-      assignee: "Jane Smith",
-      team: "WebMaster",
-      priority: "P0",
-    },
-    {
-      id: "abc123456",
-      title: "Fix Bug in Dashboard",
-      description: "Resolve issue with data not loading.",
-      startDate: "2024-04-22",
-      endDate: "2024-03-25",
-      status: "Completed",
-      assignee: "Chris Johnson",
-      team: "Coder",
-      priority: "P2",
-    },
-    {
-      id: "abc1234567",
-      title: "Update API Documentation",
-      description: "Update Swagger documentation to reflect changes.",
-      startDate: "2024-03-18",
-      endDate: null,
-      status: "Deferred",
-      assignee: "Emily Brown",
-      team: "Web Coder",
-      priority: "P1",
-    },
-    {
-      id: "abc123456789",
-      title: "Deploy Backend Service",
-      description: "Deploy backend to the vercel.",
-      startDate: "2024-05-23",
-      endDate: null,
-      status: "Deployed",
-      assignee: "Michael",
-      team: "React",
-      priority: "P0",
-    },
-  ],
-  filterData: [],
-};
+import { initialState } from "../ConstantsInitialValue";
 
 const taskSlice = createSlice({
   name: "taskSlice",
-  initialState,
+  initialState: initialState,
   reducers: {
     // Add Tasks
     addTasks: (state, { payload }) => {
@@ -93,15 +22,22 @@ const taskSlice = createSlice({
       state.tasks.push(payload);
       state.filterData = state.tasks;
     },
+
     //Update Task
     updateTask: (state, { payload }) => {
       const { priority, status, id } = payload;
       //select from Tasks
       const selectedTask = specificIdBasedDataFound(state.tasks, id);
-
+      //If status is Completed Then assign End Date
+      const date = new Date();
+      const endDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}}`;
+      if (status == "Completed") {
+        selectedTask[0].endDate = endDate;
+      }
       //Update Properties
       selectedTask[0].priority = priority;
       selectedTask[0].status = status;
+
       //Set Value
       state.filterData = state.tasks;
     },
@@ -117,7 +53,9 @@ const taskSlice = createSlice({
 
     //All Tasks Data
     allTasks: (state) => {
-      state.filterData = state.tasks;
+      state.filterData = state.tasks.sort(
+        (a, b) => new Date(b.startDate) - new Date(a.startDate)
+      );
     },
 
     //Assigneer Based Filter
@@ -127,10 +65,20 @@ const taskSlice = createSlice({
       );
     },
 
-    //Assigneer Based Filter
+    //Priorithy Based Filter
     priorityByFilter: (state, { payload }) => {
       state.filterData = state.tasks?.filter(
         (item) => item.priority == payload.priority
+      );
+    },
+
+    //Assigneer and Priority Based Filter
+    multipuleValueBasedFilter: (state, { payload }) => {
+      const { assignee, priority } = payload;
+      state.filterData = state.tasks?.filter(
+        (item) =>
+          item.priority == priority &&
+          item.assignee.toLowerCase() == assignee.toLowerCase()
       );
     },
 
@@ -168,6 +116,7 @@ export const {
   allTasks,
   assignerByFilter,
   priorityByFilter,
+  multipuleValueBasedFilter,
   dateBasedFilter,
   priorityBasedSort,
 } = taskSlice.actions;

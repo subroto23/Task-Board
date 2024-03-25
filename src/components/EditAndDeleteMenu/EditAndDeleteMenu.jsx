@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import UpdateTaskModel from "../TaskForm/UpdateTaskModel";
 
-const EditAndDeleteMenu = ({ taskId }) => {
+const EditAndDeleteMenu = ({ taskId, status }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,8 +63,13 @@ const EditAndDeleteMenu = ({ taskId }) => {
             />
           }
         </li>
+
         <li className="hover:bg-gray-200 hover:font-bold">
-          <button onClick={handleDelete} className="border-b-2 pb-2 px-6 py-3">
+          <button
+            onClick={handleDelete}
+            disabled={status === "Completed"}
+            className="border-b-2 pb-2 px-6 py-3"
+          >
             Delete
           </button>
         </li>

@@ -4,8 +4,8 @@ export const specificIdBasedDataFound = (array, id) => {
 };
 
 export const statusBasedDataArrays = (arry, status) => {
-  const statsDatas = arry?.filter((item) => item.status === status);
-  return statsDatas;
+  const startsData = arry?.filter((item) => item.status === status);
+  return startsData;
 };
 
 export const withoutIdBasedTasks = (array, id) => {

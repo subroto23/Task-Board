@@ -21,6 +21,7 @@ const Tasks = () => {
   const completedData = statusBasedDataArrays(filterData, "Completed");
   const deployedData = statusBasedDataArrays(filterData, "Deployed");
   const defferedData = statusBasedDataArrays(filterData, "Deferred");
+  console.log(completedData);
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#beabc4] via-[#e9dbfc] to-[#dfdbfc] pt-6 md:px-10 px-2 ">
       <div>

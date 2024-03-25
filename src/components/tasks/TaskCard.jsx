@@ -34,12 +34,20 @@ const TaskCard = ({ task }) => {
               isOpen={isOpen}
               setIsOpen={setIsOpen}
               taskId={taskId}
+              status={task?.status}
             />
           )}
         </div>
-        <button className="bg-primary px-4 py-1 my-2 text-white rounded-md">
-          {task?.status}
-        </button>
+        <div>
+          <button className="bg-primary px-4 py-1 my-2 text-white rounded-md">
+            {task?.status}
+          </button>
+          {task?.endDate && (
+            <strong className="block text-end -mt-7 text-[#42a81e]">
+              End:<span className="ml-1">{task?.endDate}</span>
+            </strong>
+          )}
+        </div>
       </div>
     </div>
   );

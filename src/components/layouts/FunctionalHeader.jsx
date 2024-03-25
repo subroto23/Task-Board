@@ -3,6 +3,7 @@ import {
   allTasks,
   assignerByFilter,
   dateBasedFilter,
+  multipuleValueBasedFilter,
   priorityBasedSort,
   priorityByFilter,
 } from "../../redux/features/taskSlice";
@@ -13,20 +14,37 @@ const FunctionalHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [priorityValue, setPriorityValue] = useState("");
+  const [assigneerValue, setAssigneerValue] = useState("");
+
   const dispatch = useDispatch();
 
   //Filter By Assigner Name
   const handleAssigneerFilter = (data) => {
+    setAssigneerValue(data);
     data
       ? dispatch(assignerByFilter({ assignee: data }))
       : dispatch(allTasks());
   };
   //Filter By Priority
   const handleSelectPriority = (data) => {
+    setPriorityValue(data);
     data
       ? dispatch(priorityByFilter({ priority: data }))
       : dispatch(allTasks());
   };
+
+  //handle Multiple Filters at a time
+  useEffect(() => {
+    if (assigneerValue && priorityValue) {
+      dispatch(
+        multipuleValueBasedFilter({
+          assignee: assigneerValue,
+          priority: priorityValue,
+        })
+      );
+    }
+  }, [assigneerValue, priorityValue, dispatch]);
 
   //Filted By Start and End Date
   useEffect(() => {
