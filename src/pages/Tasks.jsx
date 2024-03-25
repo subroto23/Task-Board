@@ -26,7 +26,7 @@ const Tasks = () => {
         <Header />
         <FunctionalHeader />
         {/* Main Content  section*/}
-        <div className="grid md:grid-cols-5 grid-cols-1 gap-3 md:border-4 md:border-gray-400 shadow-lg rounded-3xl mt-6 md:p-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 grid-cols-1 gap-3 md:border-4 md:border-gray-400 shadow-lg rounded-3xl mt-6 md:p-6">
           {/* Pending */}
           <div className="relative overflow-auto">
             <div className="text-center bg-[#8c8b90] p-2 rounded-tl-xl rounded-tr-xl">

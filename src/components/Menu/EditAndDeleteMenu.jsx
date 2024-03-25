@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux";
-import { deleteTask, updateTask } from "../../redux/features/taskSlice";
+import { deleteTask } from "../../redux/features/taskSlice";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import UpdateTaskModel from "../tasks/UpdateTaskModel";
 
-const EditAndDeleteMenu = ({ setIsOpen, taskId }) => {
+const EditAndDeleteMenu = ({ taskId }) => {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
   //Handle Delete Task
   const handleUpdate = () => {
-    dispatch(updateTask({ id: taskId, priority: "P0", status: "Completed" }));
+    setIsOpen(true);
   };
 
   //Handle Delete Task
@@ -29,7 +32,6 @@ const EditAndDeleteMenu = ({ setIsOpen, taskId }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteTask({ id: taskId }));
-        setIsOpen(false);
         Swal.fire({
           title: "Deleted!",
           text: "Your task has been deleted.",
@@ -53,6 +55,13 @@ const EditAndDeleteMenu = ({ setIsOpen, taskId }) => {
           >
             Edit
           </button>
+          {
+            <UpdateTaskModel
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              taskId={taskId}
+            />
+          }
         </li>
         <li className="hover:bg-gray-200 hover:font-bold">
           <button onClick={handleDelete} className="border-b-2 pb-2 px-6 py-3">

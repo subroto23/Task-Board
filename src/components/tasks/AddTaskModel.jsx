@@ -30,7 +30,7 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
               <input
                 type="text"
                 {...register("title")}
-                className="w-full rounded-md md:ml-12"
+                className="w-full rounded-md md:ml-[72px]"
               />
             </div>
             {/* Description */}
@@ -52,7 +52,7 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
               <input
                 type="text"
                 {...register("team")}
-                className="w-full rounded-md md:ml-11"
+                className="w-full rounded-md md:ml-[66px]"
               />
             </div>
             {/* Assignees */}
@@ -63,7 +63,7 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
               <input
                 type="text"
                 {...register("assignee")}
-                className="w-full rounded-md md:ml-3"
+                className="w-full rounded-md md:ml-4"
               />
             </div>
             {/* Priority */}
@@ -73,7 +73,7 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
               </label>
               <select
                 {...register("priority")}
-                className="rounded-md text-center p-1 w-1/2 md:ml-3"
+                className="rounded-md text-center p-1 w-full md:ml-2"
               >
                 <option disabled>Priority</option>
                 <option value="P0">P0</option>

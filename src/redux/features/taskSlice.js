@@ -11,6 +11,7 @@ const initialState = {
       endDate: null,
       status: "Pending",
       assignee: "John Doe",
+      team: "abc",
       priority: "P1",
     },
     {
@@ -21,6 +22,7 @@ const initialState = {
       endDate: null,
       status: "Pending",
       assignee: "John Doe",
+      team: "Falcon",
       priority: "P0",
     },
     {
@@ -31,6 +33,7 @@ const initialState = {
       endDate: null,
       status: "In Progress",
       assignee: "Jane Smith",
+      team: "WebMaster",
       priority: "P0",
     },
     {
@@ -41,6 +44,7 @@ const initialState = {
       endDate: "2024-03-25",
       status: "Completed",
       assignee: "Chris Johnson",
+      team: "Coder",
       priority: "P2",
     },
     {
@@ -51,6 +55,7 @@ const initialState = {
       endDate: null,
       status: "Deferred",
       assignee: "Emily Brown",
+      team: "Web Coder",
       priority: "P1",
     },
     {
@@ -61,6 +66,7 @@ const initialState = {
       endDate: null,
       status: "Deployed",
       assignee: "Michael",
+      team: "React Master",
       priority: "P0",
     },
   ],
@@ -83,7 +89,6 @@ const taskSlice = createSlice({
       state.tasks.push(payload);
       state.filterData = state.tasks;
     },
-
     //Update Task
     updateTask: (state, { payload }) => {
       const { priority, status, id } = payload;
@@ -154,12 +159,12 @@ const taskSlice = createSlice({
 });
 export const {
   addTasks,
+  updateTask,
   deleteTask,
   allTasks,
   assignerByFilter,
   priorityByFilter,
   dateBasedFilter,
   priorityBasedSort,
-  updateTask,
 } = taskSlice.actions;
 export default taskSlice.reducer;
