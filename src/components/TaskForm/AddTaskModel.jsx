@@ -12,7 +12,6 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
   const onSubmit = (data) => {
     //Send to the Global State
     dispatch(addTasks(data));
-
     //Form Close and Reset
     formModelClose();
     reset();

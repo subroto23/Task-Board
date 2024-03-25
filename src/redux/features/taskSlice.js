@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import {
+  specificIdBasedDataFound,
+  withoutIdBasedTasks,
+} from "../../lib/SpecificDataGenerator";
 
 const initialState = {
   tasks: [
@@ -66,7 +70,7 @@ const initialState = {
       endDate: null,
       status: "Deployed",
       assignee: "Michael",
-      team: "React Master",
+      team: "React",
       priority: "P0",
     },
   ],
@@ -92,9 +96,8 @@ const taskSlice = createSlice({
     //Update Task
     updateTask: (state, { payload }) => {
       const { priority, status, id } = payload;
-      console.log(payload);
       //select from Tasks
-      const selectedTask = state.tasks.filter((item) => item.id === id);
+      const selectedTask = specificIdBasedDataFound(state.tasks, id);
 
       //Update Properties
       selectedTask[0].priority = priority;
@@ -105,10 +108,11 @@ const taskSlice = createSlice({
 
     //Delete Task
     deleteTask: (state, { payload }) => {
+      const { id } = payload;
       //Remove from filterData Tasks
-      state.filterData = state.tasks.filter((item) => item.id !== payload.id);
+      state.filterData = withoutIdBasedTasks(state.tasks, id);
       //Remove form Orginal Task
-      state.tasks = state.tasks.filter((item) => item.id !== payload.id);
+      state.tasks = withoutIdBasedTasks(state.tasks, id);
     },
 
     //All Tasks Data

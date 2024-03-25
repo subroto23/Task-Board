@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import EditAndDeleteMenu from "../Menu/EditAndDeleteMenu";
+import EditAndDeleteMenu from "../EditAndDeleteMenu/EditAndDeleteMenu";
 const TaskCard = ({ task }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [taskId, setTaskId] = useState("");

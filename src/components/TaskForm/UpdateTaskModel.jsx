@@ -2,14 +2,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "../ui/Models";
 import { useForm } from "react-hook-form";
 import { updateTask } from "../../redux/features/taskSlice";
+import { specificIdBasedDataFound } from "../../lib/SpecificDataGenerator";
 
 const UpdateTaskModel = ({ isOpen, setIsOpen, taskId }) => {
+  const { filterData } = useSelector((state) => state.taskSlice);
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
-
-  const { filterData } = useSelector((state) => state.taskSlice);
   const taskDatas = filterData;
-  const selectedData = taskDatas?.filter((task) => task.id === taskId);
+
+  //Specific Data Getting
+  const selectedData = specificIdBasedDataFound(taskDatas, taskId);
 
   //Close Model
   const formModelClose = () => {

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { deleteTask } from "../../redux/features/taskSlice";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import UpdateTaskModel from "../tasks/UpdateTaskModel";
+import UpdateTaskModel from "../TaskForm/UpdateTaskModel";
 
 const EditAndDeleteMenu = ({ taskId }) => {
   const dispatch = useDispatch();

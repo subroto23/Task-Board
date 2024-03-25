@@ -4,22 +4,23 @@ import FunctionalHeader from "../components/layouts/FunctionalHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { allTasks } from "../redux/features/taskSlice";
+import { statusBasedDataArrays } from "../lib/SpecificDataGenerator";
+
 const Tasks = () => {
   const { filterData } = useSelector((state) => state.taskSlice);
   const dispatch = useDispatch();
+
+  //Show data when components dismounted
   useEffect(() => {
     dispatch(allTasks());
   }, [dispatch]);
 
-  const pendingData = filterData?.filter((item) => item.status === "Pending");
-  const inProgressData = filterData.filter(
-    (item) => item.status === "In Progress"
-  );
-  const completedData = filterData.filter(
-    (item) => item.status === "Completed"
-  );
-  const deployedData = filterData.filter((item) => item.status === "Deployed");
-  const defferedData = filterData.filter((item) => item.status === "Deferred");
+  //Specific Data generation
+  const pendingData = statusBasedDataArrays(filterData, "Pending");
+  const inProgressData = statusBasedDataArrays(filterData, "In Progress");
+  const completedData = statusBasedDataArrays(filterData, "Completed");
+  const deployedData = statusBasedDataArrays(filterData, "Deployed");
+  const defferedData = statusBasedDataArrays(filterData, "Deferred");
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#beabc4] via-[#e9dbfc] to-[#dfdbfc] pt-6 md:px-10 px-2 ">
       <div>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import AddTaskModel from "../tasks/AddTaskModel";
 import {
   allTasks,
   assignerByFilter,
@@ -8,6 +7,7 @@ import {
   priorityByFilter,
 } from "../../redux/features/taskSlice";
 import { useDispatch } from "react-redux";
+import AddTaskModel from "../TaskForm/AddTaskModel";
 
 const FunctionalHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
