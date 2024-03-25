@@ -12,6 +12,7 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
   const onSubmit = (data) => {
     //Send to the Global State
     dispatch(addTasks(data));
+
     //Form Close and Reset
     formModelClose();
     reset();
@@ -19,37 +20,60 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
   return (
     <div>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} title={"CREATE A TASK"}>
-        <div className="bg-gradient-to-r from-[#beabc4] via-[#e9dbfc] to-[#dfdbfc] p-4">
+        <div className="bg-gradient-to-r from-[#beabc4] via-[#e9dbfc] to-[#dfdbfc] md:p-4 p-1">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex items-center mb-4">
-              <label htmlFor="title" className="font-semibold mr-12">
+            {/* Title */}
+            <div className="flex md:flex-row flex-col md:items-center mb-4">
+              <label htmlFor="title" className="font-semibold mb-2">
                 Title:
               </label>
-              <input type="text" {...register("title")} className="w-full" />
+              <input
+                type="text"
+                {...register("title")}
+                className="w-full rounded-md md:ml-12"
+              />
             </div>
-            <div className="flex items-center mb-4">
-              <label htmlFor="description" className="font-semibold mr-1">
+            {/* Description */}
+            <div className="flex md:flex-row flex-col md:items-center mb-4">
+              <label htmlFor="description" className="font-semibold mb-2">
                 Description
               </label>
               <textarea
                 {...register("description")}
                 cols="10"
-                className="w-full"
+                className="w-full rounded-md"
               ></textarea>
             </div>
-            <div>
-              <label htmlFor="Team">Team</label>
-              <input type="text" {...register("team")} />
+            {/* Team */}
+            <div className="flex md:flex-row flex-col md:items-center mb-4">
+              <label htmlFor="Team" className="font-semibold mb-2">
+                Team
+              </label>
+              <input
+                type="text"
+                {...register("team")}
+                className="w-full rounded-md md:ml-11"
+              />
             </div>
-            <div>
-              <label htmlFor="Team">Assignees</label>
-              <input type="text" {...register("assigness")} />
+            {/* Assignees */}
+            <div className="flex md:flex-row flex-col md:items-center mb-4">
+              <label htmlFor="Team" className="font-semibold mb-2">
+                Assignee
+              </label>
+              <input
+                type="text"
+                {...register("assignee")}
+                className="w-full rounded-md md:ml-3"
+              />
             </div>
-            <div>
-              <label htmlFor="Priority">Priority</label>
+            {/* Priority */}
+            <div className="flex flex-row md:items-center mb-4 gap-4">
+              <label htmlFor="Priority" className="font-semibold mb-2">
+                Priority:
+              </label>
               <select
                 {...register("priority")}
-                className="rounded-md text-center md:w-32 p-1"
+                className="rounded-md text-center p-1 w-1/2 md:ml-3"
               >
                 <option disabled>Priority</option>
                 <option value="P0">P0</option>
@@ -57,11 +81,12 @@ const AddTaskModel = ({ isOpen, setIsOpen }) => {
                 <option value="P2">P2</option>
               </select>
             </div>
+            {/* Submit Button */}
             <div>
               <input
                 type="submit"
                 value="Submit"
-                className="bg-primary px-6 rounded-md text-white my-4"
+                className="bg-primary px-6 py-2 rounded-md text-white my-4 w-full "
               />
             </div>
           </form>
